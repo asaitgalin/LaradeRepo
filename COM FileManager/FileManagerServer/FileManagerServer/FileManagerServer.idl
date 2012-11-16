@@ -1,0 +1,84 @@
+// FileManagerServer.idl: источник IDL для FileManagerServer
+//
+
+// Этот файл будет обработан средством MIDL для
+// создания библиотеки типов (FileManagerServer.tlb) и кода маршалирования.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(ECF461BA-2211-4956-8964-1597C9DC55F6),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IFSObject : IDispatch{
+	[id(1)] HRESULT Initialize([in] BSTR path);
+	[id(2)] HRESULT GetFullPath([out,retval] BSTR* path);
+	[id(3)] HRESULT Open([out,retval] BOOL* isDir);
+	[id(4)] HRESULT Copy([in] BSTR dest);
+	[id(5)] HRESULT Delete(void);
+	[id(6)] HRESULT Move([in] BSTR dest);
+	[id(7)] HRESULT Rename([in] BSTR newName);
+	[id(8)] HRESULT isDir([out,retval] BOOL* bIsDir);
+	[id(9)] HRESULT GetCaption([out,retval] BSTR* caption);
+};
+[
+	uuid(50D54F4B-1970-4BE4-B3DE-2669C8ACC246),
+	version(1.0),
+]
+interface ICatalog : IDispatch{
+	[] HRESULT ReloadFiles(void);
+	[] HRESULT GetFilesCount([out,retval] LONG* filesCount);
+	[] HRESULT GetFileName([in] LONG index, [out,retval] BSTR* fileName);
+	[] HRESULT GetFileSystemEntriesCount([out,retval] LONG* entriesCount);
+	[] HRESULT GetFileSystemEntryName([in] LONG index, [out,retval] BSTR* entryName);
+	[] HRESULT GetDirectoriesCount([out,retval] LONG* directoriesCount);
+	[] HRESULT GetDirectoryName([in] LONG index, [out,retval] BSTR* directoryName);
+	[] HRESULT GetFile([in] LONG index, [out,retval] IFSObject** file);
+	[] HRESULT CreateFile([in] BSTR name);
+	[] HRESULT CreateDirectory([in] BSTR name);
+	[] HRESULT Initialize([in] BSTR path);
+	[] HRESULT GetFullPath([out,retval] BSTR* path);
+};
+[
+	uuid(D3FFDFA7-D6D8-4FE5-A092-B4D0E475E726),
+	version(1.0),
+]
+interface IFileObject : IDispatch{
+};
+[
+	object,
+	uuid(4DC247C6-8261-48FC-9764-0949D9F6B493),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IFolderObject : IDispatch{
+};
+[
+	uuid(D101A9CA-88D3-4E7F-B252-6EE5842CE655),
+	version(1.0),
+]
+library FileManagerServerLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(01018ECD-F895-4939-B909-AB2E117814F2)		
+	]
+	coclass FileObject
+	{
+		[default] interface IFSObject;
+	};
+	[
+		uuid(87F86C92-0F52-4468-BBD4-B6742F2AF96C)		
+	]
+	coclass FolderObject
+	{
+		[default] interface IFSObject;
+		interface ICatalog;
+	};
+};
+

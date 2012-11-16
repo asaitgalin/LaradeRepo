@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileManagerServer", "FileManagerServer\FileManagerServer.vcxproj", "{EB4C4078-64BC-4E86-9198-211DAC0EE994}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileManagerServerPS", "FileManagerServer\FileManagerServerPS.vcxproj", "{60484377-FC53-4955-9765-E9B4AABC61FE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EB4C4078-64BC-4E86-9198-211DAC0EE994} = {EB4C4078-64BC-4E86-9198-211DAC0EE994}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB4C4078-64BC-4E86-9198-211DAC0EE994}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EB4C4078-64BC-4E86-9198-211DAC0EE994}.Debug|Win32.Build.0 = Debug|Win32
+		{EB4C4078-64BC-4E86-9198-211DAC0EE994}.Release|Win32.ActiveCfg = Release|Win32
+		{EB4C4078-64BC-4E86-9198-211DAC0EE994}.Release|Win32.Build.0 = Release|Win32
+		{60484377-FC53-4955-9765-E9B4AABC61FE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{60484377-FC53-4955-9765-E9B4AABC61FE}.Release|Win32.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
