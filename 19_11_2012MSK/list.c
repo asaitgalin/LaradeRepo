@@ -23,6 +23,8 @@ int list_push_front(List *list, int value)
 	node->next = list->first;
 	node->prev = NULL;
 	list->first = node;
+	/*if (!list->last)
+		list->last = list->first;*/
 	list->size++;
 	return 1;
 }
@@ -39,6 +41,8 @@ int list_push_back(List *list, int value)
 	node->prev = list->last;
 	node->next = NULL;
 	list->last = node;
+	/*if (!list->first)
+		list->first = list->last;*/
 	list->size++;
 	return 1;
 }
