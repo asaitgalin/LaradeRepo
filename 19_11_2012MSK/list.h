@@ -1,5 +1,5 @@
 #ifndef _LIST_H_
-  #define _LIST_H_
+#define _LIST_H_
 
 struct NodeTag;
 
@@ -21,12 +21,13 @@ typedef struct
 
 int list_push_front(List *list, int value);
 int list_push_back(List *list, int value);
-void list_pop_front(List *list);
-void list_pop_back(List *list);
+int list_pop_front(List *list, int *out);
+int list_pop_back(List *list, int *out);
 int list_insert_after(List *list, Node *pos, int value);
 int list_get_size(List *list);
 void list_clear(List *list);
 void list_remove(List *list, Node *pos);
 void list_make_empty(List *list);
+void list_print(List *list);
 
 #endif

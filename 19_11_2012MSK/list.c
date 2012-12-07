@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "list.h"
 
 void list_make_empty(List *list)
@@ -16,15 +16,16 @@ int list_push_front(List *list, int value)
 	Node *node = NULL;
 	if (!list)
 		return 0;
-	node = (Node *)malloc(sizeof(Node));
+	node = (Node *)calloc(1, sizeof(Node));
 	if (!node)
 		return 0;
 	node->value = value;
 	node->next = list->first;
-	node->prev = NULL;
 	list->first = node;
-	/*if (!list->last)
-		list->last = list->first;*/
+	if (node->next)
+		node->next->prev = node;
+	if (!list->last)
+		list->last = node;
 	list->size++;
 	return 1;
 }
@@ -34,15 +35,16 @@ int list_push_back(List *list, int value)
 	Node *node = NULL;
 	if (!list)
 		return 0;
-	node = (Node *)malloc(sizeof(Node));
+	node = (Node *)calloc(1, sizeof(Node));
 	if (!node)
 		return 0;
 	node->value = value;
 	node->prev = list->last;
-	node->next = NULL;
 	list->last = node;
-	/*if (!list->first)
-		list->first = list->last;*/
+	if (node->prev)
+		node->prev->next = node;
+	if (!list->first)
+		list->first = node;
 	list->size++;
 	return 1;
 }
@@ -68,8 +70,10 @@ void list_remove(List *list, Node *pos)
 	Node *node = NULL;
 	if (!list || !pos)
 		return;
-	pos->prev->next = pos->next;
-	pos->next->prev = pos->prev;
+	if (pos->prev)
+		pos->prev->next = pos->next;
+	if (pos->next)
+		pos->next->prev = pos->prev;
 	free(pos);
 	list->size--;
 }
@@ -81,28 +85,64 @@ int list_get_size(List *list)
 	return list->size;
 }
 
-void list_pop_front(List *list)
+int list_pop_front(List *list, int *out)
 {
 	Node *node = NULL;
-	if (!list)
-		return;
+	if (!list || !out || list->size == 0)
+		return 0;
+	if (list->size == 1 && list->first)
+	{
+		*out = list->first->value;
+		free(list->first);
+		list_make_empty(list);
+		return 1;
+	}
 	node = list->first->next;
+	if (!node)
+		return 0;
+	*out = list->first->value;
 	free(list->first);
 	node->prev = NULL;
 	list->first = node;
 	list->size--;
+	return 1;
 }
 
-void list_pop_back(List *list)
+int list_pop_back(List *list, int *out)
 {
 	Node *node = NULL;
-	if (!list)
-		return;
+	if (!list || !out || list->size == 0)
+		return 0;
+	if (list->size == 1 && list->last)
+	{
+		*out = list->last->value;
+		free(list->last);
+		list_make_empty(list);
+		return 1;
+	}
 	node = list->last->prev;
+	if (!node)
+		return 0;
+	*out = list->last->value;
 	free(list->last);
 	node->next = NULL;
 	list->last = node;
 	list->size--;
+	return 1;
+}
+
+void list_print(List *list)
+{
+	Node *node = NULL;
+	if (!list || list->size == 0)
+		return;
+	node = list->first;
+	while(node)
+	{
+		printf("%d ", node->value);
+		node = node->next;
+	}
+	printf("\n");
 }
 
 void list_clear(List *list)
@@ -110,14 +150,11 @@ void list_clear(List *list)
 	Node *node = NULL;
 	if (!list)
 		return;
-	if (!list->last)
-		return;
-	node = list->last->prev;
-	while(node)
+	while(list->last)
 	{
+		node = list->last->prev;
 		free(list->last);
 		list->last = node;
-		node = list->last->prev;
 	}
-	list->size = 0;
+	list_make_empty(list);
 }
