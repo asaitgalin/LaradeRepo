@@ -21,6 +21,8 @@ int list_push_front(List *list, int value)
 		return 0;
 	node->value = value;
 	node->next = list->first;
+	if (list->first)
+		list->first->prev = node;
 	list->first = node;
 	if (node->next)
 		node->next->prev = node;
@@ -40,6 +42,8 @@ int list_push_back(List *list, int value)
 		return 0;
 	node->value = value;
 	node->prev = list->last;
+	if (list->last)
+		list->last->next = node;
 	list->last = node;
 	if (node->prev)
 		node->prev->next = node;
@@ -60,20 +64,58 @@ int list_insert_after(List *list, Node *pos, int value)
 	node->value = value;
 	node->next = pos->next;
 	node->prev = pos;
+	if (pos->next)
+		pos->next->prev = node;
 	pos->next = node;
+	if (pos == list->last)
+		list->last = node;
+	list->size++;
+	return 1;
+}
+
+int list_insert_before(List *list, Node *pos, int value)
+{
+	Node *node = NULL;
+	if (!list || !pos)
+		return 0;
+	node = (Node *)malloc(sizeof(Node));
+	if (!node)
+		return 0;
+	node->value = value;
+	node->next = pos;
+	node->prev = pos->prev;
+	if (pos->prev)
+		pos->prev->next = node;
+	pos->prev = node;
+	if (pos == list->first)
+		list->first = node;
 	list->size++;
 	return 1;
 }
 
 void list_remove(List *list, Node *pos)
 {
-	Node *node = NULL;
 	if (!list || !pos)
 		return;
+	if (list->size == 1 && list->first == pos && list->last == pos)
+	{
+		free(pos);
+		list->size--;
+		list_make_empty(list);
+		return;
+	}
 	if (pos->prev)
+	{
+		if (pos == list->last)
+			list->last = pos->prev;
 		pos->prev->next = pos->next;
+	}
 	if (pos->next)
+	{
+		if (pos == list->first)
+			list->first = pos->next;
 		pos->next->prev = pos->prev;
+	}
 	free(pos);
 	list->size--;
 }
