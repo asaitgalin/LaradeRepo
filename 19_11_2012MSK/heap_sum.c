@@ -8,25 +8,7 @@ void float_swap(float *a, float *b)
 	*b = t;
 }
 
-void min_sift_up(float *a, int i)
-{
-	int k = (i - 1) / 2;
-	while(a[i] < a[k])
-	{
-		float_swap(&a[i], &a[k]);
-		i = k;
-		k = (i - 1) / 2;
-	}
-}
-
-void heapify_min(float *a, int n)
-{
-	int i;
-	for (i = 0; i < n; ++i)
-		min_sift_up(a, i);
-}
-
-void min_sift_down(float *a, int n, int i)
+void heapify(float *a, int n, int i)
 {
 	int l = 2 * i + 1, r = 2 * i + 2;
 	int j;
@@ -50,16 +32,23 @@ void min_sift_down(float *a, int n, int i)
 		float_swap(&a[i], &a[l]);
 }
 
+void build_heap(float *a, int n)
+{
+	int i;
+	for (i = (n - 1) / 2; i >= 0; --i)
+		heapify(a, n, i);
+}
+
 float heap_sum(float *a, int n)
 {
 	float sum = 0.0f;
 	int i;
-	heapify_min(a, n);
+	build_heap(a, n);
 	for (i = n - 1; i >= 0; --i)
 	{	
 		sum += a[0];
 		float_swap(&a[0], &a[i]);
-		min_sift_down(a, i, 0);
+		heapify(a, i, 0);
 	}
 	return sum;
 }
