@@ -173,6 +173,14 @@
 			<File
 				RelativePath=".\heap_sum.c"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="C:\Users\DuXeN0N\Downloads\leak_checker.cpp"
@@ -183,7 +191,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\main.c"
+				RelativePath=".\list_demo.c"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -196,6 +204,10 @@
 			</File>
 			<File
 				RelativePath=".\tree.c"
+				>
+			</File>
+			<File
+				RelativePath=".\tree_demo.c"
 				>
 			</File>
 		</Filter>
