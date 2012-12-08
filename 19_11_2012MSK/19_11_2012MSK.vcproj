@@ -171,6 +171,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\heap_sum.c"
+				>
+			</File>
+			<File
 				RelativePath="C:\Users\DuXeN0N\Downloads\leak_checker.cpp"
 				>
 			</File>
@@ -181,6 +185,18 @@
 			<File
 				RelativePath=".\main.c"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\tree.c"
+				>
 			</File>
 		</Filter>
 		<Filter
@@ -190,6 +206,10 @@
 			>
 			<File
 				RelativePath=".\list.h"
+				>
+			</File>
+			<File
+				RelativePath=".\tree.h"
 				>
 			</File>
 		</Filter>
