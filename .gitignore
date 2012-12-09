@@ -7,6 +7,9 @@ $ cat .gitignore
 *.suo
 *.bat
 *.exe
+*.sdf
+*.ipch
 *~
+obj/
 Debug/
 Release/
