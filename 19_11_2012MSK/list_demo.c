@@ -25,7 +25,6 @@ const char *help_str = "General functions:\n"
 					   "insert_after\n"
 					   "insert_before";
 
-const char *list_err = "List doesn't exist!";
 const char *node_err = "List is empty or node doesn't exist";
 
 enum push_direction
@@ -67,16 +66,20 @@ void push(char *args, List *list, int pd)
 	}
 }
 
-void pop(char *args, List *list, int pd)
+void pop(char *args, List *list, Node **current, int pd)
 {
 	int n;
 	if (pd == pd_front)
 	{
+		if (*current == list->first)
+			*current = NULL;
 		if (list_pop_front(list, &n))
 			printf("%d\n", n);
 	}
 	else
 	{
+		if (*current == list->last)
+			*current = NULL;
 		if (list_pop_back(list, &n))
 			printf("%d\n", n);
 	}
@@ -94,13 +97,8 @@ void insert(char *args, List *list, Node *node, int direction)
 	}		
 }
 
-void print_value(List *list, Node *node)
+void print_value(Node *node)
 {
-	if (!list)
-	{
-		printf("%s\n", list_err);
-		return;
-	}
 	if (!node)
 	{	
 		printf("%s\n", node_err);
@@ -135,18 +133,20 @@ int main()
 		else if (!strcmp(cmd, "push_back"))
 			push(args, &list, pd_back);
 		else if (!strcmp(cmd, "current"))
-			print_value(&list, current);
+			print_value(current);
 		else if (!strcmp(cmd, "jump_first"))
 			current = list.first;
 		else if (!strcmp(cmd, "jump_last"))
 			current = list.last;
 		else if (!strcmp(cmd, "jump_next")) {
-			if (current->next)
-				current = current->next;
+			if (current)		
+				if (current->next)
+					current = current->next;
 		}
 		else if (!strcmp(cmd, "jump_prev")) {
-			if (current->prev)
-				current = current->prev;
+			if (current)
+				if (current->prev)
+					current = current->prev;
 		}
 		else if (!strcmp(cmd, "print"))
 			list_print(&list);
@@ -159,15 +159,15 @@ int main()
 		else if (!strcmp(cmd, "insert_before"))
 			insert(args, &list, current, id_before);
 		else if (!strcmp(cmd, "pop_back"))
-			pop(args, &list, pd_back);
+			pop(args, &list, &current, pd_back);
 		else if (!strcmp(cmd, "pop_front"))
-			pop(args, &list, pd_front);
+			pop(args, &list, &current, pd_front);
 		else if (!strcmp(cmd, "push_front"))
 			push(args, &list, pd_front);
 		else if (!strcmp(cmd, "front"))
-			print_value(&list, list.first);
+			print_value(list.first);
 		else if (!strcmp(cmd, "back"))
-			print_value(&list, list.last);
+			print_value(list.last);
 		else
 			printf("Command \"%s\" not found\n", cmd);
 	}

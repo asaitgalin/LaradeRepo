@@ -1,0 +1,40 @@
+c7cafcc - Andrey Saitgalin, 41 seconds ago: Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+6a36f1e - Andrey Saitgalin, 2 minutes ago: Changed .gitignore
+59edfbc - Evgeny Eltishev, 5 minutes ago: Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+859ee4d - Evgeny Eltishev, 15 minutes ago: AVL Tree in C++
+0c754c9 - Andrey Saitgalin, 13 hours ago: Added Binary Search Tree interface (tree.c, tree.h) and created demos for list and tree
+66875b8 - Andrey Saitgalin, 20 hours ago: Now it takes O(n) to build heap
+9b84638 - Andrey Saitgalin, 21 hours ago: Working heap sum
+d7fb105 - Andrey Saitgalin, 2 days ago: Added nothing
+0151f60 - Andrey Saitgalin, 2 days ago: Fixed list functionality, added list_insert_before, made demo application
+2c4db13 - Andrey Saitgalin, 2 days ago: Added list functionality
+ce2fdcc - Evgeny Eltishev, 3 days ago: Class for expression solving
+4903d44 - Andrey Saitgalin, 2 weeks ago: Made some changes
+3e5998b - Andrey Saitgalin, 3 weeks ago: Added new project for working with list
+a4a0e2d - Andrey Saitgalin, 3 weeks ago: Merge branch 'testing'
+95b0fd2 - Andrey Saitgalin, 3 weeks ago: brr
+7e401f0 - Andrey Saitgalin, 3 weeks ago: changed readme
+feeb66d - Andrey Saitgalin, 3 weeks ago: Nothing done
+d9fc797 - Andrey Saitgalin, 3 weeks ago: Deleted newfile.md
+a5c4779 - Andrey Saitgalin, 3 weeks ago: Merge branch 'testing'
+3c33f62 - Andrey Saitgalin, 3 weeks ago: Added file
+5d88cdf - Andrey Saitgalin, 3 weeks ago: Changed readme
+0d60bd6 - Andrey Saitgalin, 3 weeks ago: Added projects: Home Library, vNote Creator, two plugins for FAR: FarShutdown and FarDeviceEjector
+40fc320 - Andrey Saitgalin, 3 weeks ago: Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+e748b9c - Evgeny Eltishev, 3 weeks ago: Some JSON parsing examples. Program doesnt work, need to repair
+dca0dbd - Evgeny Eltishev, 3 weeks ago: some sort algorithms, test generator and sort checker
+69f97f6 - Andrey Saitgalin, 3 weeks ago: Test commit
+ca786ed - Evgeny Eltishev, 3 weeks ago: Prim's algorithm visualisation
+0390d80 - Evgeny Eltishev, 3 weeks ago: Some delphi fun
+a82a346 - Evgeny Eltishev, 3 weeks ago: Test task from Prognoz company. Simple, bugging and poor file manager
+05d3782 - Evgeny Eltishev, 3 weeks ago: simple HTML editor with very poor IntelliSense emulation
+6efbc02 - Evgeny Eltishev, 3 weeks ago: Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+021fdfc - Evgeny Eltishev, 3 weeks ago: Decart's tree optimized for task 1019 at acm.timus.ru
+2ad0b50 - Andrey Saitgalin, 3 weeks ago: Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+308b582 - Andrey Saitgalin, 3 weeks ago: Deleted trash
+0595dd2 - Evgeny Eltishev, 3 weeks ago: Class for work with polynoms
+66d2443 - Evgeny Eltishev, 3 weeks ago: Heap with iterator. Really cool thing
+c65248d - Evgeny Eltishev, 3 weeks ago: FASDASD
+aa6e98c - Andrey Saitgalin, 3 weeks ago: First commit
+dd30156 - Eltyshev Evgeny, 3 weeks ago: Update README.md
+54879cf - Andrey, 3 weeks ago: Initial commit

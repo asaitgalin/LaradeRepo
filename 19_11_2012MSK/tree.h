@@ -28,7 +28,8 @@ int tree_insert_right(SearchTree *tree, TreeNode *pos, int value);
 TreeNode *tree_find(SearchTree *tree, int value);
 SearchTree *tree_build_from_array(int *a, int n);
 int tree_size(SearchTree *tree);
-void tree_remove_subtree(TreeNode *root);
+void tree_remove_subtree(SearchTree *tree, TreeNode *node);
 void tree_clear(SearchTree *tree);
+void tree_print(SearchTree *tree);
 
 #endif
