@@ -1,0 +1,12 @@
+$ cat .gitignore
+*.dll
+*.identcache
+*.zip
+*.ncb
+*.user
+*.suo
+*.bat
+*.exe
+*~
+Debug/
+Release/
