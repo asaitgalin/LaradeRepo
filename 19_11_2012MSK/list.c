@@ -42,7 +42,7 @@ int list_push_back(List *list, int value)
 		return 0;
 	node->value = value;
 	node->prev = list->last;
-		if (list->last)
+	if (list->last)
 		list->last->next = node;
 	list->last = node;
 	if (node->prev)
