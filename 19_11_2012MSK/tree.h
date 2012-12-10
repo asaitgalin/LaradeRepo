@@ -1,8 +1,6 @@
 #ifndef _TREE_H_
 #define _TREE_H_
 
-/* Binary Search Tree for integers */
-
 struct TreeNode_Tag;
 
 struct TreeNode_Tag
