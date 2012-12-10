@@ -3,6 +3,11 @@
  * EventNotifier - 0 arguments
  * EventNotifier1 - 1 argument
  * EventNotifier2 - 2 arguments
+ * Usage: 
+ *	EventNotifier1<int> e;
+ *	e += func1;
+ *  e(15);
+ *	e -= func1;
  */
 #pragma once
 
