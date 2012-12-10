@@ -1,8 +1,6 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
-/* Tiny integer list. Written by Andrey Saitgalin */
-
 struct NodeTag;
 
 struct NodeTag

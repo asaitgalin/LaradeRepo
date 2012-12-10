@@ -1,0 +1,289 @@
+commit daa01eb3145dce9c0b3546f7da123abbeb7b2d9d
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Mon Dec 10 17:57:13 2012 +0400
+
+    Added students list. I believe it was my last homework this year :)
+
+commit 5d4164bdee85b03db2bcde40eed6f7ce64cbd594
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Mon Dec 10 17:09:21 2012 +0400
+
+    Tested list and tree. Added test for heap sum. Fixed heap sum algorithm
+
+commit 999866431d26560c25e1528c106588728a6c03db
+Merge: 99b3258 298f096
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Mon Dec 10 15:25:06 2012 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo into testing
+
+commit 298f096986ac0d100d0fcbfd8e7017869d3563aa
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Mon Dec 10 11:51:04 2012 +0400
+
+    some fixes
+
+commit 18af7c8d4ea7cf59a0f8058616d75d6464c90869
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Mon Dec 10 11:37:48 2012 +0400
+
+    some fixes
+
+commit 483496a7badda84ec3b707df8c689a9f377d9113
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Mon Dec 10 11:34:39 2012 +0400
+
+    hz
+
+commit 99b32588ba7af0b2eb23900a9d8b9eb1c37b7c65
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Mon Dec 10 03:21:29 2012 +0400
+
+    Added demo app for BST, tested list, fixed some small bugs
+
+commit c7cafcc237864c900a6a1ad5e7abc9cc024c0ecd
+Merge: 6a36f1e 59edfbc
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sun Dec 9 16:15:35 2012 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit 6a36f1e74cb211c7cc5a7cb2f2acbae35b59a61f
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sun Dec 9 16:13:49 2012 +0400
+
+    Changed .gitignore
+
+commit 59edfbc4a49856f3bfa42bcb2c822ffce55ce9b1
+Merge: 859ee4d 4903d44
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Sun Dec 9 16:11:44 2012 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit 859ee4d24676d65029e8788096335cfa453a1d10
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Sun Dec 9 16:01:40 2012 +0400
+
+    AVL Tree in C++
+
+commit 0c754c9bfca56355361c0d5dac900ed2a42052b3
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sun Dec 9 03:36:23 2012 +0400
+
+    Added Binary Search Tree interface (tree.c, tree.h) and created demos for list and tree
+
+commit 66875b87982f9c8f265a9dcac14ac2a8ba10bbfa
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Dec 8 19:48:51 2012 +0400
+
+    Now it takes O(n) to build heap
+
+commit 9b846383e5e11c3cc232ff1f10caadb818241df1
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Dec 8 19:32:20 2012 +0400
+
+    Working heap sum
+
+commit d7fb105380b866f41b8ac753928d37f58635e039
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Dec 8 00:18:31 2012 +0400
+
+    Added nothing
+
+commit 0151f6012988609e141b697808ba93efebaeb550
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Fri Dec 7 23:08:24 2012 +0400
+
+    Fixed list functionality, added list_insert_before, made demo application
+
+commit 2c4db13cd56ddaa36c546ad4e9b2f8efab19f9d2
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Fri Dec 7 20:56:05 2012 +0400
+
+    Added list functionality
+
+commit ce2fdccdd3270cd8129cc746eeab678b8b420953
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Thu Dec 6 21:52:41 2012 +0400
+
+    Class for expression solving
+
+commit 4903d444f5d11519a4e75597cf9cc37a2e28e347
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Nov 24 14:27:24 2012 +0400
+
+    Made some changes
+
+commit 3e5998bdbd346dfd0050dab12ab84bde95fa7e9e
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Mon Nov 19 20:07:51 2012 +0400
+
+    Added new project for working with list
+
+commit a4a0e2dfbfa74ff3573685e5f15185d5d8caf64a
+Merge: 95b0fd2 7e401f0
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sun Nov 18 01:02:07 2012 +0400
+
+    Merge branch 'testing'
+
+commit 95b0fd2e03bd3597b2e70360bed35e09be9efff2
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sun Nov 18 01:01:54 2012 +0400
+
+    brr
+
+commit 7e401f07190fe728b91398659970abb62af4e5a6
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sun Nov 18 01:00:49 2012 +0400
+
+    changed readme
+
+commit feeb66d5965a14ad90b24f2c7f855d0c1b85ced4
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sun Nov 18 00:58:44 2012 +0400
+
+    Nothing done
+
+commit d9fc7979cd4ccc0e936ea4acd047cdec106c2196
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Nov 17 15:56:55 2012 +0400
+
+    Deleted newfile.md
+
+commit a5c4779b6246a7e35cd79a645a9f952c31774d00
+Merge: 3c33f62 5d88cdf
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Nov 17 15:40:57 2012 +0400
+
+    Merge branch 'testing'
+
+commit 3c33f62821dac36062fa66d6fd909d0ebb98f027
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Nov 17 11:01:12 2012 +0400
+
+    Added file
+
+commit 5d88cdf85fa882b005e76b5476cb076db26d8167
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Nov 17 10:58:03 2012 +0400
+
+    Changed readme
+
+commit 0d60bd6c4e967492c57355fa7ac63f6c5e85a2f9
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Sat Nov 17 00:05:39 2012 +0400
+
+    Added projects: Home Library, vNote Creator, two plugins for FAR: FarShutdown and FarDeviceEjector
+
+commit 40fc320178a80521583af7d158c57726bafd738d
+Merge: 69f97f6 e748b9c
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Fri Nov 16 23:47:23 2012 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit e748b9cd3697c9233892a195db6600951df3c173
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:45:39 2012 +0400
+
+    Some JSON parsing examples. Program doesnt work, need to repair
+
+commit dca0dbd25b7f101b3d0f38f3e89f68f2c67fd10a
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:41:13 2012 +0400
+
+    some sort algorithms, test generator and sort checker
+
+commit 69f97f60d6cc800d1f61f63dd38b5c7cb8c91398
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Fri Nov 16 23:39:22 2012 +0400
+
+    Test commit
+
+commit ca786ed78ddb3e1869e502e0713406d6e80ba68b
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:38:06 2012 +0400
+
+    Prim's algorithm visualisation
+
+commit 0390d809bbf7c8b5aaf5564bc8d498d68b8358cc
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:37:11 2012 +0400
+
+    Some delphi fun
+
+commit a82a346609186bb501d5907954f995ef93a988d4
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:36:13 2012 +0400
+
+    Test task from Prognoz company. Simple, bugging and poor file manager
+
+commit 05d37821f12a36fa3f2546f57daf91f0ff2026cd
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:32:34 2012 +0400
+
+    simple HTML editor with very poor IntelliSense emulation
+
+commit 6efbc022e87fb2a5f90cb136ee468d6e0fdea6a0
+Merge: 021fdfc 2ad0b50
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:28:06 2012 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit 021fdfc9958aa046a8da1cc256a63d8f6f873268
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:19:59 2012 +0400
+
+    Decart's tree optimized for task 1019 at acm.timus.ru
+
+commit 2ad0b50957062484fe62ce941886763da4e6733a
+Merge: 308b582 0595dd2
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Fri Nov 16 23:09:12 2012 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit 308b582cf6bf9f939c768e1e505f2bf1f34a0c92
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Fri Nov 16 23:08:32 2012 +0400
+
+    Deleted trash
+
+commit 0595dd214f78fbfdb483a974b980a0970b0b7a4e
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:05:52 2012 +0400
+
+    Class for work with polynoms
+
+commit 66d24435d0d718b655695ed25fdda4e98365df02
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 23:00:15 2012 +0400
+
+    Heap with iterator. Really cool thing
+
+commit c65248dc2af324377670846d40e9fa4287c16dc1
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Fri Nov 16 22:48:13 2012 +0400
+
+    FASDASD
+
+commit aa6e98c47aa3be67ba826a2c4ac79428fc58959f
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Fri Nov 16 22:04:54 2012 +0400
+
+    First commit
+
+commit dd3015605fcd3ef3ea52a4e630952857b5e85316
+Author: Eltyshev Evgeny <eltyshev.e@gmail.com>
+Date:   Fri Nov 16 21:46:52 2012 +0400
+
+    Update README.md
+
+commit 54879cf3e231c4ee6eefbb560cb269753701d0d6
+Author: Andrey <andrey.saitgalin@gmail.com>
+Date:   Fri Nov 16 09:24:01 2012 -0800
+
+    Initial commit

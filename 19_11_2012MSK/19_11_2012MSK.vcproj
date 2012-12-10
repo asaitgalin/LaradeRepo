@@ -203,12 +203,24 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\students.c"
+				>
+			</File>
+			<File
 				RelativePath=".\tree.c"
 				>
 			</File>
 			<File
 				RelativePath=".\tree_demo.c"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter

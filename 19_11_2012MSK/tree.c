@@ -123,14 +123,14 @@ SearchTree *tree_build_from_array(int *a, int n)
 	return tree;
 }
 
-void tree_remove_subtree(TreeNode *node)
+void tree_remove_subtree(SearchTree *tree, TreeNode *node)
 {
 	if (!node)
 		return;
 	if (node->left)
-		tree_remove_subtree(node->left);
+		tree_remove_subtree(tree, node->left);
 	if (node->right)
-		tree_remove_subtree(node->right);
+		tree_remove_subtree(tree, node->right);
 	if (!node->left && !node->right)
 	{
 		if (node->parent)
@@ -140,7 +140,10 @@ void tree_remove_subtree(TreeNode *node)
 			if (node->parent->right == node)
 				node->parent->right = NULL;
 		}
+		if (tree->root == node)
+			tree->root = NULL;
 		free(node);
+		tree->size--;
 	}
 }
 
@@ -148,8 +151,25 @@ void tree_clear(SearchTree *tree)
 {
 	if (!tree)
 		return;
-	tree_remove_subtree(tree->root);
-	tree_make_empty(tree);
+	tree_remove_subtree(tree, tree->root);
 }
 
+void tree_print_branch(TreeNode *node, int depth)
+{
+	int i;
+	for (i = 0; i < depth * 2; ++i)
+		printf(" ");
+	printf("%d\n", node->value);
+	if (node->left)
+		tree_print_branch(node->left, depth + 1);
+	if (node->right)
+		tree_print_branch(node->right, depth + 1);
+}
+
+void tree_print(SearchTree *tree)
+{
+	if (tree_size(tree) == 0)
+		return;
+	tree_print_branch(tree->root, 0);
+}
 
