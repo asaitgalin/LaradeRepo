@@ -320,7 +320,7 @@ public:
 int main()
 {
 	AVLTree* t = new AVLTree();
-	freopen("C:\\temp\\in.txt", "r", stdin);
+	//freopen("C:\\temp\\in.txt", "r", stdin);
 	std::deque<Handle> d;
 	int K;
 	std::cin >> K;

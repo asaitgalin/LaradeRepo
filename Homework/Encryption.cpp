@@ -1,50 +1,54 @@
 #include <iostream>
 #include <string>
-#include <time.h>
+#include <ctime>
+#include <cstdlib>
 
-#define TREE_TYPE char
-
+template<typename T>
 struct ImplicityTreap
 {
-	int y;
+	int priority;
 	size_t size;
-	TREE_TYPE c;
+	T key;
 	ImplicityTreap* Left;
 	ImplicityTreap* Right;
 
-	ImplicityTreap(TREE_TYPE v)
-	{
-		this->c = v;
-		y = rand();
-		Left = 0;
-		Right = 0;
-		size = 1;
-	}
+	ImplicityTreap(T key);
 };
 
-typedef ImplicityTreap* pTreap;
+template<typename T>
+ImplicityTreap<T>::ImplicityTreap(T Key)
+{
+	this->key = Key;
+	priority = rand();
+	Left = 0;
+	Right = 0;
+	size = 1;
+}
 
-size_t SizeOf(pTreap t)
+template<typename T>
+size_t SizeOf(const ImplicityTreap<T>* t)
 {
 	return t ? t->size : 0;
 }
 
-void Recalc(pTreap t)
+template<typename T>
+void Recalc(ImplicityTreap<T>* t)
 {
 	if (!t)
 		return;
 	t->size = SizeOf(t->Left) + SizeOf(t->Right) + 1;
 }
 
-pTreap Merge(pTreap l, pTreap r)
+template<typename T>
+ImplicityTreap<T>* Merge(ImplicityTreap<T>* l, ImplicityTreap<T>* r)
 {
 	if (!l)
 		return r;
 	if (!r)
 		return l;
-	pTreap result;
+	ImplicityTreap<T>* result;
 
-	if (l->y >= r->y)
+	if (l->priority >= r->priority)
 	{
 		result = l;
 		result->Right = Merge(l->Right, r);
@@ -58,7 +62,8 @@ pTreap Merge(pTreap l, pTreap r)
 	return result;
 }
 
-void Split(pTreap t, size_t x, pTreap& l, pTreap& r)
+template<typename T>
+void Split(ImplicityTreap<T>* t, size_t x, ImplicityTreap<T>*& l, ImplicityTreap<T>*& r)
 {
 	if (!t)
 	{
@@ -82,33 +87,43 @@ void Split(pTreap t, size_t x, pTreap& l, pTreap& r)
 	}
 }
 
-void PushBack(pTreap& t, TREE_TYPE v)
+template<typename T>
+void PushBack(ImplicityTreap<T>*& t, T value)
 {
-	pTreap p = new ImplicityTreap(v);
+	ImplicityTreap<T>* p = new ImplicityTreap<T>(value);
 	t = Merge(t, p);
 }
 
 //#define PRINT_SIZES
-void PrintRecursive(pTreap t)
+
+template<typename T>
+void PrintRecursive(ImplicityTreap<T>* t, std::string& s)
 {
 	if (!t)
 		return;
-	PrintRecursive(t->Left);
+	PrintRecursive(t->Left, s);
 #ifdef PRINT_SIZES
-	std::cout << "(" << t->c << "," << t->size << ") ";
+	s += "(";
+	s += t->key;
+	s += ",";
+	s += t->size;
+	s += ") ";
 #else
-	std::cout << t->c;
+	s += t->key;
 #endif
-	PrintRecursive(t->Right);
+	PrintRecursive(t->Right, s);
 }
 
-void Print(pTreap t)
+template<typename T>
+std::string Print(ImplicityTreap<T>* t)
 {
-	PrintRecursive(t);
-	std::cout << std::endl;
+	std::string s;
+	PrintRecursive(t, s);
+	return s;
 }
 
-void DeleteTree(pTreap t)
+template<typename T>
+void DeleteTree(ImplicityTreap<T>* t)
 {
 	if (!t)
 		return;
@@ -117,9 +132,10 @@ void DeleteTree(pTreap t)
 	delete t;
 }
 
-void Encrypt(pTreap& t, size_t L, size_t R, size_t s)
+template<typename T>
+void Encrypt(ImplicityTreap<T>*& t, size_t L, size_t R, size_t s)
 {
-	pTreap l1, l2, l3, r;
+	ImplicityTreap<T> *l1, *l2, *l3, *r;
 	Split(t, L, l1, r);
 	Split(r, R-L+1-s, l2, r);
 	Split(r, s, l3, r);
@@ -131,11 +147,11 @@ void Encrypt(pTreap& t, size_t L, size_t R, size_t s)
 int main()
 {
 	srand(time(NULL));
-	freopen("C:\\temp\\in.txt", "r", stdin);
-	pTreap t = 0;
+	//freopen("C:\\temp\\in.txt", "r", stdin);
+	ImplicityTreap<char>* t = 0;
 	std::string st;
 	std::cin >> st;
-	t = new ImplicityTreap(st[0]);
+	t = new ImplicityTreap<char>(st[0]);
 	for(size_t i=1; i < st.size(); ++i)
 		PushBack(t, st[i]);
 	int N;
@@ -146,9 +162,9 @@ int main()
 		std::cin >> l;
 		std::cin >> r;
 		std::cin >> s;
-		Encrypt(t, l-1, r-1, s);
+		Encrypt<char>(t, l-1, r-1, s);
 	}
-	Print(t);
+	std::cout << Print(t) << std::endl;
 	DeleteTree(t);
 	return 0;
 }
