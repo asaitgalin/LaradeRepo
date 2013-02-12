@@ -47,6 +47,7 @@
 				RuntimeLibrary="3"
 				FloatingPointModel="0"
 				UsePrecompiledHeader="0"
+				AssemblerOutput="4"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -184,18 +185,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\euler.c"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\minicalc.c"
 				>
 				<FileConfiguration
@@ -208,15 +197,8 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\sort_test.c"
+				RelativePath=".\sort_test.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\str_split.c"
@@ -258,15 +240,26 @@
 				Name="def"
 				>
 				<File
-					RelativePath=".\my_vec.c"
+					RelativePath=".\mt19937ar.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\sort.c"
+					RelativePath=".\my_vec.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\sort.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\utils.c"
+					RelativePath=".\utils.cpp"
 					>
 				</File>
 			</Filter>
@@ -277,8 +270,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\mt19937ar.h"
+				>
+			</File>
+			<File
 				RelativePath=".\my_vec.h"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\sort.h"

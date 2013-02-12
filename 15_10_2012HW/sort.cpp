@@ -3,7 +3,71 @@
 #include <time.h>
 #include <string.h>
 #include "utils.h"
+#include "mt19937ar.h"
 #include "sort.h"
+
+inline void byte_swap(unsigned char *a, unsigned char *b, size_t item_size)
+{
+	size_t i;
+	unsigned char t;
+	for (i = 0; i < item_size; ++i)
+	{
+		t = a[i];
+		a[i] = b[i];
+		b[i] = t;
+	}
+}
+
+void isort(void *a, size_t num, size_t item_size, p_compare cmp)
+{
+	unsigned char *pi, *pj;
+	unsigned char *arr = (unsigned char *)a;
+	for (pi = arr + item_size; pi < arr + (num * item_size); pi += item_size)
+		for (pj = pi; pj > arr && (cmp(pj - item_size, pj) > 0); pj -= item_size)
+			byte_swap(pj - item_size, pj, item_size); 
+}
+
+void do_qisort(void *a, size_t num, size_t item_size, p_compare cmp, unsigned char *pivot_buf)
+{
+	unsigned char *arr = (unsigned char *)a;
+	unsigned char *pi = arr, *pj = arr + ((num - 1) * item_size), *pv = pj;
+	if (num <= 1)
+		return;
+	if (num < 7)
+	{
+		isort(a, num, item_size, cmp);
+		return;
+	}
+	memcpy(pivot_buf, arr + (genrand_int32() % num) * item_size, item_size); 
+	while(pi <= pj)
+	{
+		while(cmp(pi, pivot_buf) < 0)
+			pi += item_size;
+		while(cmp(pj, pivot_buf) > 0)
+			pj -= item_size;
+		if (pi <= pj)
+		{
+			if (pi < pj)
+				byte_swap(pi, pj, item_size);
+			pi += item_size;
+			pj -= item_size;
+		}
+	}
+	if (pj > arr)
+		do_qisort(arr, (pj - arr) / item_size + 1, item_size, cmp, pivot_buf);
+	if (pi < pv)
+		do_qisort(pi, (pv - pi) / item_size + 1, item_size, cmp, pivot_buf);
+}
+
+void qisort(void *a, size_t num, size_t item_size, p_compare cmp)
+{
+	unsigned char *pivot = (unsigned char *)calloc(1, item_size);
+	if (!pivot)
+		return;
+	init_genrand(time(NULL));
+	do_qisort(a, num, item_size, cmp, pivot);
+	free(pivot);
+}
 
 void insertion_sort(int *a, int n)
 {
@@ -17,7 +81,7 @@ int get_pivot(int n)
 {
 	int x, i;
 	unsigned char *p = (unsigned char *)&x;
-	srand(time(0));
+	srand(time(NULL));
 	for (i = 0; i < sizeof(int); ++i)
 		p[i] = rand() % 256;
 	if (x < 0)
