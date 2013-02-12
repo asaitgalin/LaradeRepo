@@ -4,11 +4,20 @@
 #include "sort.h"
 #include "utils.h"
 
+int compare(const void *a, const void *b)
+{
+	int num1 = *(int *)a;
+	int num2 = *(int *)b;
+	if (num1 > num2)
+		return 1;
+	else if (num2 > num1)
+		return -1;
+	else 
+		return 0;
+}
+
 int main()
 {
-	/*float a[] = {4.2f, 1.0f, 23.2f, 1.4f, 7.4f, 9.6f};
-	float sum = heap_sum(a, sizeof(a) / sizeof(a[0]));
-	printf("%f\n", sum);*/
 	int n;
 	int *a;
 	clock_t after, before;
@@ -17,7 +26,7 @@ int main()
 	{
 			a = get_int_array(n, 3);
 			before = clock();
-			quick_sort(a, n);
+			qisort(a, n, sizeof(int), compare); 
 			after = clock();
 			//print_int_array(a, n);
 			if (is_sorted(a, n))

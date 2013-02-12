@@ -1,5 +1,5 @@
-#ifndef _UTILS_H_
-  #define _UTILS_H_
+#ifndef UTILS_H
+  #define UTILS_H
 
 void read_int_array(int *a, int n);
 void print_int_array(const int *a, int n);

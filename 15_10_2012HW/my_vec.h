@@ -1,5 +1,5 @@
-#ifndef _MYVEC_H_
-  #define _MYVEC_H_
+#ifndef MYVEC_H
+  #define MYVEC_H
 
 /* My own small integer vector for pure C :) */
 
