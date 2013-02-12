@@ -55,24 +55,24 @@ class SQLWorkerBase
 
 struct BaseFileInfo
 {
-    long FileHash;
-    long PathHash;
-    string Path;
-    string Name
+    public long FileHash;
+    public long PathHash;
+    public string Path;
+    public string Name
     {
         get 
         {
             return System.IO.Path.GetFileName(Path);
         }
     }
-    string Extension 
+    public string Extension 
     {
         get
         {
             return System.IO.Path.GetExtension(Path);
         }
     }
-    long Size;
+    public long Size;
 
     public BaseFileInfo(long fileHash, long pathHash, string path, long size)
     {
@@ -87,6 +87,7 @@ class SQLFileWorker : SQLWorkerBase
 {
     protected SqlCommand InsertCmd;
     protected SqlCommand InsertPathCmd;
+    protected SqlCommand SelectFileHash;
 
     public SQLFileWorker()
     {
@@ -108,15 +109,15 @@ class SQLFileWorker : SQLWorkerBase
         InsertPathCmd.Parameters.Add("@filePath", System.Data.SqlDbType.NVarChar);
     }
 
-    public long Insert(long fileHash, long pathHash, string path, string fileName, string extension, long size)
+    public long Insert(BaseFileInfo fi)
     {
-        CheckExtension(extension);
+        CheckExtension(fi.Extension);
 
-        InsertCmd.Parameters["@pathHash"].Value = pathHash;
-        InsertCmd.Parameters["@fileHash"].Value = fileHash;
-        InsertCmd.Parameters["@name"].Value = fileName;
-        InsertCmd.Parameters["@extension"].Value = extension;
-        InsertCmd.Parameters["@size"].Value = size;
+        InsertCmd.Parameters["@pathHash"].Value = fi.PathHash;
+        InsertCmd.Parameters["@fileHash"].Value = fi.FileHash;
+        InsertCmd.Parameters["@name"].Value = fi.Name;
+        InsertCmd.Parameters["@extension"].Value = fi.Extension;
+        InsertCmd.Parameters["@size"].Value = fi.Size;
         reader = InsertCmd.ExecuteReader();
 
         reader.Read();
@@ -124,9 +125,15 @@ class SQLFileWorker : SQLWorkerBase
         reader.Close();
 
         InsertPathCmd.Parameters["@id"].Value = id;
-        InsertPathCmd.Parameters["@filePath"].Value = path;
+        InsertPathCmd.Parameters["@filePath"].Value = fi.Path;
         InsertPathCmd.ExecuteNonQuery();
         return long.Parse(id);
+    }
+
+    public bool FindByFileHash(long Hash)
+    {
+        
+        return false;
     }
 
     private void CheckExtension(string extension)

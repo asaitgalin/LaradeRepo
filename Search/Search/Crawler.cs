@@ -15,21 +15,24 @@ class FileProcessor : IFileProcessor
         worker = new SQLFileWorker();
     }
 
-    public long ProcessFile(string path)
+    public virtual long ProcessFile(string path)
     {
         FileInfo fi = new FileInfo(path);
         long size = fi.Length;
         long fileHash = Hasher.HashFile(path);
         long pathHash = Hasher.HashPath(path);
-        string fileName = Path.GetFileName( path );
-        string extension = Path.GetExtension( path );
-        
-        long id = worker.Insert(fileHash, pathHash, path, fileName, extension, size);
+
+        BaseFileInfo fileInfo = new BaseFileInfo(fileHash, pathHash, path, size);
+
+        long id = worker.Insert( fileInfo );
         return id;
     }
 }
 
-class Au : FileProcessor
+class AudioFileProcessor : FileProcessor
 {
-    
+    public override long ProcessFile( string path )
+    {
+        return base.ProcessFile( path );
+    }
 }
