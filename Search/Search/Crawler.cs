@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 interface IFileProcessor
 {
-    long ProcessFile(string path);
+    long ProcessFile(FileInfo info);
 }
 
 class FileProcessor : IFileProcessor
@@ -15,24 +16,68 @@ class FileProcessor : IFileProcessor
         worker = new SQLFileWorker();
     }
 
-    public virtual long ProcessFile(string path)
+    public virtual long ProcessFile(FileInfo info)
     {
-        FileInfo fi = new FileInfo(path);
-        long size = fi.Length;
-        long fileHash = Hasher.HashFile(path);
-        long pathHash = Hasher.HashPath(path);
+        long id = -1;
+        int i=0;
+        for(;;)
+        {
+            long pathHash = Hasher.HashPath( info.FullName );
+            id = worker.FindByPathHash(pathHash);
+            if ( id != -1 )
+                break;
 
-        BaseFileInfo fileInfo = new BaseFileInfo(fileHash, pathHash, path, size);
+            long fileHash = Hasher.HashFile(info.FullName);
+            id = worker.FindByFileHash( fileHash );
+            if ( id != -1 )
+            {
+                worker.InsertFolderInfo(id, info.FullName);
+                break;
+            }
 
-        long id = worker.Insert( fileInfo );
+            long size = info.Length;
+            BaseFileInfo fileInfo = new BaseFileInfo(fileHash, pathHash, info.FullName, size);
+            id = worker.Insert( fileInfo );
+            break;
+        }
         return id;
     }
 }
 
 class AudioFileProcessor : FileProcessor
 {
-    public override long ProcessFile( string path )
+    public override long ProcessFile( FileInfo info )
     {
-        return base.ProcessFile( path );
+        return base.ProcessFile( info );
+    }
+}
+
+class Crawler
+{
+    protected IFileProcessor Processor;
+    protected string InitDirectory;
+
+    public Crawler(IFileProcessor fileProc, string initDirectory)
+    {
+        Processor = fileProc;
+        InitDirectory = initDirectory;
+    }
+
+    public void DoWork()
+    {
+        ScanDirectory(new DirectoryInfo(InitDirectory));
+    }
+
+    private void ScanDirectory(DirectoryInfo directory)
+    {
+        foreach(var file in directory.GetFiles())
+        {
+            Processor.ProcessFile(file);
+        }
+
+        foreach(var dir in directory.GetDirectories())
+        {
+            ScanDirectory(dir);
+        }
     }
 }
