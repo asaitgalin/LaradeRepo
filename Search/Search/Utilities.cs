@@ -132,7 +132,16 @@ class SQLFileWorker : SQLWorkerBase
         InsertCmd.Parameters["@folderPath"].Value = parent;
         InsertCmd.Parameters["@extension"].Value = fi.Extension;
         InsertCmd.Parameters["@size"].Value = fi.Size;
-        long id = long.Parse(InsertCmd.ExecuteScalar().ToString());
+
+        long id = -1;
+        try
+        {
+            id = long.Parse(InsertCmd.ExecuteScalar().ToString());
+        }
+        catch
+        {
+            // write to log
+        }
         InsertFolderInfo(id, fi.Path);
 
         return id;
@@ -140,6 +149,9 @@ class SQLFileWorker : SQLWorkerBase
 
     public void InsertFolderInfo(long id, string filePath)
     {
+        if (id == -1)
+            return;
+
         CheckFolder(filePath);
         string folder = Directory.GetParent(filePath).FullName;
         string query = String.Format(   "INSERT INTO {0} (id, folderId) VALUES (@id, (SELECT id FROM Folders WHERE path = @folderPath))", 
@@ -183,7 +195,7 @@ class SQLFileWorker : SQLWorkerBase
     private void CheckExtension(string extension)
     {
         string query = String.Format(
-            "SELECT 1 FROM {0} WHERE extension = @extension " + 
+            "SELECT ID FROM {0} WHERE extension = @extension " + 
             "IF @@ROWCOUNT = 0 INSERT INTO {0} (extension) VALUES (@extension)", 
             SQLSettings.extensionTable);
         SqlCommand tempCmd = new SqlCommand(query, connect);

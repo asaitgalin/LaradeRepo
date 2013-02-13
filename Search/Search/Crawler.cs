@@ -18,6 +18,7 @@ class FileProcessor : IFileProcessor
 
     public virtual long ProcessFile(FileInfo info)
     {
+        Console.WriteLine(info.FullName);
         long id = -1;
         int i=0;
         for(;;)
