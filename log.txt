@@ -1,3 +1,79 @@
+commit d3700ddbadf3417374bd97fa7245466e21fbd8f5
+Merge: f77ae07 b8a8749
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Tue Feb 12 14:00:18 2013 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit f77ae07f4da684759b34550897777ed732987394
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Tue Feb 12 13:59:54 2013 +0400
+
+    Added VS2008 solution
+
+commit b8a874994a265314ebfae52c2368f3b629c3c486
+Merge: 59079d2 e22435a
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Tue Feb 12 13:58:19 2013 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit 59079d2cf171d04a411cfa7a00798b6f9db856ae
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Tue Feb 12 13:57:28 2013 +0400
+
+    nothing special
+
+commit e22435a36db6b7ef98af2cbdfa3d2ca7ba71cea9
+Merge: d63ee80 ae77a77
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Tue Feb 12 13:47:27 2013 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit d63ee80d9e905e06825ef3bad2189418f5661f73
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Tue Feb 12 13:46:59 2013 +0400
+
+    Added and changed some stuff I don't remember
+
+commit ae77a77accda068b1a00734d5a93deb456c96430
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Tue Feb 12 13:38:23 2013 +0400
+
+    Search project
+
+commit da4bff97e8006389949366bc8810435650cab81e
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Tue Dec 18 22:28:20 2012 +0400
+
+    BYEAL
+
+commit 54a508a66fc2fe481f2ae41f20a13e07c05a3cf9
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Thu Dec 13 09:37:41 2012 +0400
+
+    HOMEWORK BLEAT
+
+commit d1062a68ab7b64c4dcb2ec83cdaac1212073bcf0
+Merge: 9a78209 c525c23
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Mon Dec 10 22:07:11 2012 +0400
+
+    Merge branch 'master' of https://github.com/DuXeN0N/LaradeRepo
+
+commit 9a7820934898d3d338131caa0a39dd0412552c11
+Author: Evgeny Eltishev <evgeny.eltishev@phystech.edu>
+Date:   Mon Dec 10 22:06:49 2012 +0400
+
+    HOMEWORK BLYAT
+
+commit c525c231a80e88095b76dc4f1d1b569f282ef549
+Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
+Date:   Mon Dec 10 18:00:05 2012 +0400
+
+    Updated log file
+
 commit daa01eb3145dce9c0b3546f7da123abbeb7b2d9d
 Author: Andrey Saitgalin <andrey.saitgalin@gmail.com>
 Date:   Mon Dec 10 17:57:13 2012 +0400
