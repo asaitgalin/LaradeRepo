@@ -10,7 +10,7 @@ class Hasher
 
     public static long HashFile(string path)
     {
-        byte[] name = Encoding.Default.GetBytes( Path.GetFileName( path ) );
+        byte[] name = Encoding.Unicode.GetBytes( Path.GetFileName( path ) );
         byte[] buff = new byte[1024 * 512 + name.Length];
         byte[] hashValue;
         int bytesCount = 0;
@@ -38,7 +38,7 @@ class Hasher
 
     public static long HashPath(string path)
     {
-        byte[] buff = Encoding.Default.GetBytes(path);
+        byte[] buff = Encoding.Unicode.GetBytes(path);
         byte[] hashValue = mySHA256.ComputeHash(buff);
         return BitConverter.ToInt64(hashValue, 0);
     }
@@ -46,12 +46,14 @@ class Hasher
 
 class SQLSettings
 {
-    public const string Server               =   "LAPTOP\\SQLEXPRESS";
-    public const string Database             =   "MIPTSearch";
-    public const string filesTable           =   "Files";
-    public const string extensionTable       =   "Extensions";
-    public const string filePathsTable       =   "Folders";
-    public const string locationsTable       =   "Locations";
+    public const string Server                  =   "LAPTOP\\SQLEXPRESS";
+    public const string Database                =   "MIPTSearch";
+    public const string filesTable              =   "Files";
+    public const string extensionTable          =   "Extensions";
+    public const string filePathsTable          =   "Folders";
+    public const string locationsTable          =   "Locations";
+    public const string insertProcedure         =   "InsertFile";
+    public const string checkPathHashProcedure  =   "CheckPathHash";
 }
 
 class SQLWorkerBase
@@ -105,116 +107,41 @@ class SQLFileWorker : SQLWorkerBase
 
     public SQLFileWorker()
     {
-        string query = String.Format(
-            "INSERT INTO {0}   (pathHash, fileHash, name, extension, size) " + 
-            "VALUES (@pathHash, @fileHash, @name, " + 
-            "(SELECT ID FROM {1} WHERE extension = @extension), @size);" +
-            "SELECT SCOPE_IDENTITY()",
-            SQLSettings.filesTable, SQLSettings.extensionTable, SQLSettings.filePathsTable);
-        InsertCmd = new SqlCommand( query, connect );
+        InsertCmd = new SqlCommand( SQLSettings.insertProcedure, connect );
+        InsertCmd.CommandType = System.Data.CommandType.StoredProcedure;
         InsertCmd.Parameters.Add( "@pathHash", System.Data.SqlDbType.BigInt );
         InsertCmd.Parameters.Add( "@fileHash", System.Data.SqlDbType.BigInt );
         InsertCmd.Parameters.Add( "@name", System.Data.SqlDbType.NVarChar );
-        InsertCmd.Parameters.Add("@folderPath", System.Data.SqlDbType.NVarChar);
+        InsertCmd.Parameters.Add( "@parentFolder", System.Data.SqlDbType.NVarChar);
         InsertCmd.Parameters.Add( "@extension", System.Data.SqlDbType.NVarChar);
         InsertCmd.Parameters.Add( "@size", System.Data.SqlDbType.BigInt );
+        InsertCmd.Parameters.Add( "@fileId", System.Data.SqlDbType.BigInt);
+        InsertCmd.Parameters["@fileId"].Direction = System.Data.ParameterDirection.Output;
     }
 
     public long Insert(BaseFileInfo fi)
     {
-        CheckExtension(fi.Extension);
-
         string parent = Directory.GetParent(fi.Path).FullName;
 
         InsertCmd.Parameters["@pathHash"].Value = fi.PathHash;
         InsertCmd.Parameters["@fileHash"].Value = fi.FileHash;
         InsertCmd.Parameters["@name"].Value = fi.Name;
-        InsertCmd.Parameters["@folderPath"].Value = parent;
+        InsertCmd.Parameters["@parentFolder"].Value = parent;
         InsertCmd.Parameters["@extension"].Value = fi.Extension;
         InsertCmd.Parameters["@size"].Value = fi.Size;
-
-        long id = -1;
-        try
-        {
-            id = long.Parse(InsertCmd.ExecuteScalar().ToString());
-        }
-        catch
-        {
-            // write to log
-        }
-        InsertFolderInfo(id, fi.Path);
-
-        return id;
-    }
-
-    public void InsertFolderInfo(long id, string filePath)
-    {
-        if (id == -1)
-            return;
-
-        CheckFolder(filePath);
-        string folder = Directory.GetParent(filePath).FullName;
-        string query = String.Format(   "INSERT INTO {0} (id, folderId) VALUES (@id, (SELECT id FROM Folders WHERE path = @folderPath))", 
-                                        SQLSettings.locationsTable);
-        SqlCommand tempCmd = new SqlCommand(query, connect);
-        tempCmd.Parameters.Add("@id", System.Data.SqlDbType.BigInt);
-        tempCmd.Parameters.Add("@folderPath", System.Data.SqlDbType.NVarChar);
-        tempCmd.Parameters["@id"].Value = id;
-        tempCmd.Parameters["@folderPath"].Value = folder;
-        tempCmd.ExecuteNonQuery();
-    }
-
-    public long FindByFileHash(long Hash)
-    {
-        string query = String.Format("SELECT ID FROM {0} WHERE fileHash = @fileHash", SQLSettings.filesTable);
-        SqlCommand selectCmd = new SqlCommand(query, connect);
-        selectCmd.Parameters.Add("@fileHash", System.Data.SqlDbType.BigInt);
-        selectCmd.Parameters["@fileHash"].Value = Hash;
-        reader = selectCmd.ExecuteReader();
-        long result = -1;
-        if (reader.Read())
-            result = long.Parse(reader[0].ToString());
-        reader.Close();
-        return result;
+        InsertCmd.ExecuteNonQuery();
+        return long.Parse(InsertCmd.Parameters["@fileId"].Value.ToString()); 
     }
 
     public long FindByPathHash(long Hash)
     {
-        string query = String.Format( "SELECT ID FROM {0} WHERE fileHash = @pathHash", SQLSettings.filesTable );
-        SqlCommand selectCmd = new SqlCommand( query, connect );
+        SqlCommand selectCmd = new SqlCommand( SQLSettings.checkPathHashProcedure, connect );
+        selectCmd.CommandType = System.Data.CommandType.StoredProcedure;
         selectCmd.Parameters.Add( "@pathHash", System.Data.SqlDbType.BigInt );
         selectCmd.Parameters["@pathHash"].Value = Hash;
-        reader = selectCmd.ExecuteReader();
-        long result = -1;
-        if (reader.Read())
-            result = long.Parse(reader[0].ToString());
-        reader.Close();
-        return result;
-    }
-
-    private void CheckExtension(string extension)
-    {
-        string query = String.Format(
-            "SELECT ID FROM {0} WHERE extension = @extension " + 
-            "IF @@ROWCOUNT = 0 INSERT INTO {0} (extension) VALUES (@extension)", 
-            SQLSettings.extensionTable);
-        SqlCommand tempCmd = new SqlCommand(query, connect);
-        tempCmd.Parameters.Add("@extension", System.Data.SqlDbType.NVarChar);
-        tempCmd.Parameters["@extension"].Value = extension;
-        tempCmd.ExecuteNonQuery();
-    }
-
-    private void CheckFolder(string path)
-    {
-        string parent = Directory.GetParent(path).FullName;
-        string query = String.Format(
-            "SELECT 1 FROM {0} WHERE path = @folderPath " +
-            "IF @@ROWCOUNT = 0 INSERT INTO {0} (path) VALUES (@folderPath);",
-            SQLSettings.filePathsTable);
-        SqlCommand tempCmd = new SqlCommand(query, connect);
-        tempCmd.Parameters.Add("@folderPath", System.Data.SqlDbType.NVarChar);
-        tempCmd.Parameters["@folderPath"].Value = parent;
-        tempCmd.ExecuteNonQuery();
-        //return (long)tempCmd.ExecuteScalar();
+        selectCmd.Parameters.Add( "@fileId", System.Data.SqlDbType.BigInt);
+        selectCmd.Parameters["@fileId"].Direction = System.Data.ParameterDirection.Output;
+        selectCmd.ExecuteNonQuery();
+        return long.Parse(selectCmd.Parameters["@fileId"].Value.ToString());
     }
 }

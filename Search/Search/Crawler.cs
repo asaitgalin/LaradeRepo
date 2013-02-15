@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 interface IFileProcessor
 {
@@ -20,7 +21,6 @@ class FileProcessor : IFileProcessor
     {
         Console.WriteLine(info.FullName);
         long id = -1;
-        int i=0;
         for(;;)
         {
             long pathHash = Hasher.HashPath( info.FullName );
@@ -29,13 +29,6 @@ class FileProcessor : IFileProcessor
                 break;
 
             long fileHash = Hasher.HashFile(info.FullName);
-            id = worker.FindByFileHash( fileHash );
-            if ( id != -1 )
-            {
-                worker.InsertFolderInfo(id, info.FullName);
-                break;
-            }
-
             long size = info.Length;
             BaseFileInfo fileInfo = new BaseFileInfo(fileHash, pathHash, info.FullName, size);
             id = worker.Insert( fileInfo );

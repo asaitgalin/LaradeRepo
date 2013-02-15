@@ -12,7 +12,10 @@ namespace Search
     {
         static void Main(string[] args)
         {
-            Crawler crawler = new Crawler( new FileProcessor(), @"C:\temp" );
+            string path1 = @"C:\temp";
+            string path2 = @"\\natalie.campus\incoming\! Botanstvo";
+
+            Crawler crawler = new Crawler( new FileProcessor(),  path2);
             crawler.DoWork();
         }
     }
